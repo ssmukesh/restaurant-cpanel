@@ -27,6 +27,7 @@ app.use(morgan('combined', { stream: accessLogStream }));
 app.get('/', (req, res) => res.render('user/login'));
 app.get('/signout', (req, res) => res.render('user/signout'));
 app.get('/admin/dashboard', (req, res) => res.render('admin/dashboard'));
+app.get('/lookup/cusines', (req, res) => res.render('master-details/cusines'));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));

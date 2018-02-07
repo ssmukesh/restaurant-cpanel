@@ -77,6 +77,9 @@
         redirect_dashboard: function (options) {
             window.location = "/admin/dashboard";
         },
+        redirect_masterdetails_cusines: function (options) {
+            window.location = "/lookup/cusines";
+        },
         redirect_login: function (options) {
             window.location = "/";
         },        

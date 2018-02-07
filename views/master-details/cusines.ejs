@@ -1,0 +1,31 @@
+<% layout('layout-home') -%>
+    <% include ../partials/syncfusion%>
+        <main role="main">
+            <div id="dvCusines">
+                <div id="cusineTab">
+                    <ul>
+                        <li>
+                            <a href="#tabCusines">Cusines</a>
+                        </li>
+                        <li>
+                            <a href="#tabCategory">Category</a>
+                        </li>
+                        <li>
+                            <a href="#tabDishes">Dishes</a>
+                        </li>
+                    </ul>
+                    <div id="tabCusines">
+                        <h1>Cusines</h1>
+                    </div>
+                    <div id="tabCategory">
+                        <h1>Category</h1>
+                    </div>
+                    <div id="tabDishes">
+                        <h1>Dishes</h1>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <script src="/javascripts/app/home/Plugin.Menu.js"></script>
+        <script src="/javascripts/app/master-details/cusines.js"></script>
+        <script src="/javascripts/app/master-details/Plugin.Cusines.js"></script>
