@@ -1,0 +1,7 @@
+JSON_APP_CONFIG={
+    "issuer": "",
+    "endpoint": {
+        "authorization": "",
+        "refreshtoken": ""
+    }
+}
