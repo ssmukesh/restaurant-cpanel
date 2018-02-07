@@ -78,7 +78,7 @@
             window.location = "/admin/dashboard";
         },
         redirect_masterdetails_cusines: function (options) {
-            window.location = "/lookup/cusines";
+            window.location = "/lookup/cuisines";
         },
         redirect_login: function (options) {
             window.location = "/";

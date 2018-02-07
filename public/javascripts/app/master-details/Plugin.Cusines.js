@@ -29,10 +29,13 @@
 
         this.options = {
             container: "",
-            cusineTab: ""
+            cusineTab: "",
+            gridCusines: "",
+            cusinesEJModel: []
         };
         this.options.container = element;
         this.options.cusineTab = element.find("#cusineTab");
+        this.options.gridCusines = element.find("#gridCusines");
         this.init(options);
     };
 
@@ -44,11 +47,74 @@
             });
     }
 
+    function _cusinesStubData(options) {
+        options.cusinesEJModel.push({ ID: Math.floor(Math.random() * 999999), Name: 'Iranian', Description: 'Iranian' });
+        options.cusinesEJModel.push({ ID: Math.floor(Math.random() * 999999), Name: 'Fried Chicken', Description: 'Fried Chicken' });
+        options.cusinesEJModel.push({ ID: Math.floor(Math.random() * 999999), Name: 'Yemeni', Description: 'Yemeni' });
+        options.cusinesEJModel.push({ ID: Math.floor(Math.random() * 999999), Name: 'Syrian', Description: 'Syrian' });
+
+        return options.cusinesEJModel;
+    }
+
+    function _loadCusinesGrid(options) {
+        options.gridCusines.ejGrid({
+            dataSource: _cusinesStubData(options),
+            allowPaging: true,
+            isResponsive: true,
+            allowSorting: true,
+            allowMultiSorting: true,
+            allowFiltering: true,
+            gridLines: ej.Grid.GridLines.Horizontal,
+            filterSettings: { showFilterBarStatus: true, statusBarWidth: 500 },
+            allowResizing: true,
+            allowScrolling: true,
+            scrollSettings: { width: '100%', height: '100%' },
+            pageSettings: { pageSize: 10 },
+            enableHeaderHover: true,
+            filterSettings: { filterType: "menu" },
+            allowTextWrap: true,
+            editSettings: { allowEditing: true, allowAdding: true, allowDeleting: true, editMode: "batch" },
+            toolbarSettings: {
+                showToolbar: true, toolbarItems:
+                    [
+                        ej.Grid.ToolBarItems.Add,
+                        ej.Grid.ToolBarItems.Edit, ej.Grid.ToolBarItems.Delete, ej.Grid.ToolBarItems.Update, ej.Grid.ToolBarItems.Cancel,
+                        ej.Grid.ToolBarItems.ExcelExport, ej.Grid.ToolBarItems.WordExport, ej.Grid.ToolBarItems.PdfExport
+                    ]
+            },
+            columns: [
+                {
+                    field: "ID", isPrimaryKey: true, headerText: "ID", textAlign: ej.TextAlign.Right,
+                    validationRules: { required: true, number: true }, width: 90, visible: false
+                },
+                { field: "Name", headerText: 'Cuisine Name', width: 150 },
+                { field: "Description", headerText: 'Description', width: 150 },
+            ],
+            toolbarClick: function (e) {
+                this.exportGrid = this["export"];
+                if (e.itemName == "Excel Export") {
+                    //this.exportGrid(window.baseurl + 'api/grid/ExcelExport')
+                    options.container.HelperPlugin().showPNotifyAlert(options, { title: "Coming soon...", text: "An awesome export option is coming very soon.", type: "info" });
+                    e.cancel = true;
+                }
+                else if (e.itemName == "Word Export") {
+                    options.container.HelperPlugin().showPNotifyAlert(options, { title: "Coming soon...", text: "An awesome export option is coming very soon.", type: "info" });
+                    e.cancel = true;
+                }
+                else if (e.itemName == "PDF Export") {
+                    options.container.HelperPlugin().showPNotifyAlert(options, { title: "Coming soon...", text: "An awesome export option is coming very soon.", type: "info" });
+                    e.cancel = true;
+                }
+            },
+        });
+    }
+
     Plugin.prototype = {
         // initialize options
         init: function (options) {
             $.extend(this.options, options);
             _configureMasterTab(this.options);
+            _loadCusinesGrid(this.options);
         }
     };
 
