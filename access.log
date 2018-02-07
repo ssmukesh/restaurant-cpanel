@@ -197,3 +197,7 @@
 ::1 - - [07/Feb/2018:07:43:03 +0000] "GET /javascripts/pnotify.mobile.js.map HTTP/1.1" 404 172 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.140 Safari/537.36"
 ::1 - - [07/Feb/2018:07:44:18 +0000] "GET /lookup/cuisines HTTP/1.1" 200 5085 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.140 Safari/537.36"
 ::1 - - [07/Feb/2018:07:44:18 +0000] "GET /javascripts/pnotify.mobile.js.map HTTP/1.1" 404 172 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.140 Safari/537.36"
+::ffff:127.0.0.1 - - [07/Feb/2018:07:56:27 +0000] "GET /lookup/cuisines HTTP/1.1" 200 5248 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.140 Safari/537.36"
+::ffff:127.0.0.1 - - [07/Feb/2018:07:56:29 +0000] "GET /javascripts/pnotify.mobile.js.map HTTP/1.1" 404 172 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.140 Safari/537.36"
+::1 - - [07/Feb/2018:07:56:29 +0000] "GET /lookup/cuisines HTTP/1.1" 200 5248 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.140 Safari/537.36"
+::1 - - [07/Feb/2018:07:56:29 +0000] "GET /javascripts/pnotify.mobile.js.map HTTP/1.1" 404 172 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.140 Safari/537.36"
