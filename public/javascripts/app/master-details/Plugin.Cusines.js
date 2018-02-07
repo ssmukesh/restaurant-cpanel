@@ -156,7 +156,7 @@
                     field: "ID", isPrimaryKey: true, headerText: "ID", textAlign: ej.TextAlign.Right,
                     validationRules: { required: true, number: true }, width: 90, visible: false
                 },
-                { field: "Name", headerText: 'Cuisine Name', width: 150 },
+                { field: "Name", headerText: 'Name', width: 150 },
                 { field: "Description", headerText: 'Description', width: 150 },
             ],
             toolbarClick: function (e) {
