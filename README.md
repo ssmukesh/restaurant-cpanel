@@ -1,5 +1,3 @@
-# jm-apptaccounting-api
-JM apartment accounting API
+# CPanel - Restaurants UAE
 
-* http://localhost:3000/
-* https://janhavimeadows-api.herokuapp.com/
+* http://restaurants-uae.com/
