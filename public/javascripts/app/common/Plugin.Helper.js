@@ -29,7 +29,8 @@
         this.options = {
             container: "",
             notifySettings: "",
-            loadingModal: ""
+            loadingModal: "",
+            ejWaitingPopup_container: ""
         };
 
         this.options.container = element;
@@ -64,7 +65,25 @@
         }
     }
 
-    
+    function _init_ejWaitingPopup(options) {
+        options.ejWaitingPopup_container.ejWaitingPopup({
+            showOnInit: true,
+            showImage: true,
+            text: "Loading... Please wait..."
+        });
+    }
+
+    function _show_hide_ejWaitingPopup(options, isShow) {
+        if (isShow) {
+            var erData = options.ejWaitingPopup_container.data("ejWaitingPopup");
+            erData.show();
+        }
+        else {
+            options.ejWaitingPopup_container.data("ejWaitingPopup").hide();
+        }
+    }
+
+
     Plugin.prototype = {
         // initialize options
         init: function (options) {
@@ -82,14 +101,21 @@
         },
         redirect_login: function (options) {
             window.location = "/";
-        },        
+        },
         showPNotifyAlert: function (options, notifySettings) {
             this.options.notifySettings = notifySettings;
             this.options.container.PNotifyPlugin().showStack_bar_top(this.options.notifySettings);
         },
         Loading: function (options, isShow) {
             _showHideModalLoading(this.options, isShow);
-        }       
+        },
+        InitEjWaitingPopup: function (ejWaitingPopup_container) {
+            this.options.ejWaitingPopup_container = ejWaitingPopup_container;
+            _init_ejWaitingPopup(this.options, ejWaitingPopup_container);
+        },
+        ShowHideEjWaitingPopup: function (isShow) {
+            _show_hide_ejWaitingPopup(this.options, isShow);
+        }
     };
 
     /*

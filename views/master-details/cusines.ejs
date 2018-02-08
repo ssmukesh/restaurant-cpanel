@@ -1,6 +1,6 @@
 <% layout('layout-home') -%>
     <% include ../partials/syncfusion%>
-        <main role="main">
+        <main role="main" class="clsDvCusines">
             <div id="dvCusines">
                 <div id="cusineTab">
                     <ul>
@@ -12,6 +12,9 @@
                         </li>
                         <li>
                             <a href="#tabDishes">Dishes</a>
+                        </li>
+                        <li>
+                            <a href="#tabDishesMapping">Dishes - Mapping</a>
                         </li>
                     </ul>
                     <div id="tabCusines">
@@ -27,7 +30,36 @@
                         <div id="gridMeals"></div>
                     </div>
                     <div id="tabDishes">
-                        <h1>Dishes</h1>
+                        <h4>
+                            <span class="badge badge-info">List of Dishes</span>
+                        </h4>
+                        <div id="gridDishes"></div>
+                    </div>
+                    <div id="tabDishesMapping">
+                        <h4>
+                            <span class="badge badge-info">Dishes - Cuisines, Meals & Snacks</span>
+                        </h4>
+                        <div class="row">
+                            <div class="col-4">
+                                <div id="dishesMappingAccordion">
+                                    <h3>
+                                        <a href="#">Cuisines</a>
+                                    </h3>
+                                    <div id="dvCuisinesMapping">
+                                        <div id="gridCuisinesMapping"></div>
+                                    </div>
+                                    <h3>
+                                        <a href="#">Meals & Snacks</a>
+                                    </h3>
+                                    <div id="dvMealsMapping">
+                                        <div id="gridMealsMapping"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-8">
+                                <div id="gridDishesMapping"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
