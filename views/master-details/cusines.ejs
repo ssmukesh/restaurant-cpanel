@@ -16,6 +16,9 @@
                         <li>
                             <a href="#tabDishesMapping">Dishes - Mapping</a>
                         </li>
+                        <li>
+                            <a href="#tabRestaurantsMapping">Restaurants - Mapping</a>
+                        </li>
                     </ul>
                     <div id="tabCusines">
                         <h4>
@@ -57,7 +60,56 @@
                                 </div>
                             </div>
                             <div class="col-8">
+                                <div class="my-2 my-lg-3">
+                                    <button class="btn btn-outline-primary my-2 my-sm-0" id="btnDishMapping">Click here to map your Dishes, Cuisines and Meals</button>
+                                </div>
                                 <div id="gridDishesMapping"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="tabRestaurantsMapping">
+                        <h4>
+                            <span class="badge badge-info">Restaurants - Dishes, Cuisines, Meals & Snacks</span>
+                        </h4>
+                        <div class="row">
+                            <div class="col-4">
+                                <div id="RestaurantsMappingAccordion">
+                                    <h3>
+                                        <a href="#">Dishes</a>
+                                    </h3>
+                                    <div id="dvRestDishMapping">
+                                        <div id="gridRestDishMapping"></div>
+                                    </div>
+                                    <h3>
+                                        <a href="#">Cuisines</a>
+                                    </h3>
+                                    <div id="dvRestCuisinesMapping">
+                                        <div id="gridRestCuisinesMapping"></div>
+                                    </div>
+                                    <h3>
+                                        <a href="#">Meals & Snacks</a>
+                                    </h3>
+                                    <div id="dvRestMealsMapping">
+                                        <div id="gridRestMealsMapping"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-8">
+                                <div class="my-2 my-lg-3">
+                                    <button class="btn btn-outline-primary my-2 my-sm-0" id="btnRestaurantMapping">Click here to map your Restaurants with Dishes, Cuisines and Meals</button>
+                                </div>
+                                <div id="gridRestaurantMapping"></div>
+                                <script id="tabGridContents" type="text/x-jsrender">
+                                    <div class="tabcontrol" id="tabRestaurantDts">
+                                        <ul>
+                                            <li><a href="#dvgridDish{{:ID}}">Dishes</a></li>                                            
+                                        </ul>
+                                        <div id="dvgridDish{{:ID}}">
+                                            <div id="restaurantDishDetailsGrid">
+                                            </div>
+                                        </div>                                        
+                                    </div>
+                                </script>
                             </div>
                         </div>
                     </div>

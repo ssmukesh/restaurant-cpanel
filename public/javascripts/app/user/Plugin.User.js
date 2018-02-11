@@ -28,9 +28,11 @@
 
         this.options = {
             // default options
-            container: ""
+            container: "",
+            homeContainer: ""
         };
 
+        this.options.homeContainer = $("#homeContainer");
         this.options.container = element;
         this.init(options);
     };
@@ -39,15 +41,16 @@
 
         var userInfo = { email: $("#inputEmail").val(), password: $("#inputPassword").val() };
 
-        options.container.HelperPlugin().Loading(options, true);
+        options.container.HelperPlugin().ShowHideEjWaitingPopup(true);
 
         try {
 
-            if (_.isEqual(userInfo.email, 'admin@restaurants-uae.com') && _.isEqual(userInfo.password, 'admin123')) {
+            if (_.isEqual(userInfo.email, 'admin@restaurants-uae.com')
+                && _.isEqual(userInfo.password, 'admin123')) {
                 options.container.HelperPlugin().redirect_dashboard();
             }
             else {
-                options.container.HelperPlugin().Loading(options, false);
+                options.container.HelperPlugin().ShowHideEjWaitingPopup(false);
                 options.container.HelperPlugin().showPNotifyAlert(options, {
                     title: "Having Trouble Signing On?",
                     text: 'You have entered an incorrect email or Password. Please enter your information again.', type: "error"
@@ -80,6 +83,7 @@
         init: function (options) {
             $.extend(this.options, options);
             _registerEvents(this.options);
+            this.options.container.HelperPlugin().InitEjWaitingPopup(this.options.homeContainer);
         },
     };
 

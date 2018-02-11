@@ -67,16 +67,17 @@
 
     function _init_ejWaitingPopup(options) {
         options.ejWaitingPopup_container.ejWaitingPopup({
-            showOnInit: true,
+            showOnInit: false,
             showImage: true,
-            text: "Loading... Please wait..."
+            text: "Please wait..."
         });
     }
 
     function _show_hide_ejWaitingPopup(options, isShow) {
         if (isShow) {
-            var erData = options.ejWaitingPopup_container.data("ejWaitingPopup");
-            erData.show();
+            // var erData = options.ejWaitingPopup_container.data("ejWaitingPopup").show();
+            // erData.show();
+            options.ejWaitingPopup_container.data("ejWaitingPopup").show();
         }
         else {
             options.ejWaitingPopup_container.data("ejWaitingPopup").hide();

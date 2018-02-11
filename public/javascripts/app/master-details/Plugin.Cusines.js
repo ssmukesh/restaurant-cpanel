@@ -28,8 +28,8 @@
         this.element = element;
 
         this.options = {
+            homeContainer: "",
             container: "",
-            clsDvCusines: "",
             cusineTab: "",
             gridCusines: "",
             gridMeals: "",
@@ -43,10 +43,19 @@
             cusines_ddl_EJModel: [],
             mealsandSnacksEJModel: [],
             mealsandSnacks_ddl_EJModel: [],
-            dishesEJModel: []
+            dishesEJModel: [],
+            restaurantsEJModel: [],
+            btnDishMapping: "",
+
+            restaurantsMappingAccordion: "",
+            gridRestCuisinesMapping: "",
+            gridRestMealsMapping: "",
+            gridRestDishMapping: "",
+            btnRestaurantMapping: "",
+            gridRestaurantMapping: ""
         };
 
-        this.options.clsDvCusines = $(".clsDvCusines");
+        this.options.homeContainer = $("#homeContainer");
         this.options.container = element;
         this.options.cusineTab = element.find("#cusineTab");
         this.options.gridCusines = element.find("#gridCusines");
@@ -57,16 +66,54 @@
         this.options.gridMealsMapping = element.find("#gridMealsMapping");
         this.options.gridDishesMapping = element.find("#gridDishesMapping");
         this.options.dishesMappingAccordion = element.find("#dishesMappingAccordion");
+        this.options.btnDishMapping = element.find("#btnDishMapping");
+
+        this.options.restaurantsMappingAccordion = element.find("#RestaurantsMappingAccordion");
+        this.options.gridRestCuisinesMapping = element.find("#gridRestCuisinesMapping");
+        this.options.gridRestMealsMapping = element.find("#gridRestMealsMapping");
+        this.options.gridRestDishMapping = element.find("#gridRestDishMapping");
+        this.options.btnRestaurantMapping = element.find("#btnRestaurantMapping");
+        this.options.gridRestaurantMapping = element.find("#gridRestaurantMapping");
 
         this.init(options);
     };
 
-    function _ejAccordion(options) {
-        options.dishesMappingAccordion.ejAccordion({ enableMultipleOpen: false });
-    }
-
     function _configureMasterTab(options) {
         options.cusineTab.ejTab({ headerPosition: "top" });
+    }
+
+    function _ejAccordion(options) {
+        options.dishesMappingAccordion.ejAccordion({ enableMultipleOpen: false });
+        options.restaurantsMappingAccordion.ejAccordion({ enableMultipleOpen: false });
+    }
+
+    function _configureEvents(options) {
+        options.btnDishMapping.unbind('click').bind('click', function (event) { _events_click_btnDishMapping(event, options); });
+        options.btnRestaurantMapping.unbind('click').bind('click', function (event) { _events_click_btnRestaurantMapping(event, options); });
+    }
+
+    function _events_click_btnDishMapping(event, options) {
+        event.preventDefault();
+        options.container.HelperPlugin().ShowHideEjWaitingPopup(true);
+        setTimeout(function () {
+            options.container.HelperPlugin().ShowHideEjWaitingPopup(false);
+            options.container.HelperPlugin().showPNotifyAlert(options, {
+                title: "Message",
+                text: "Mapping has been successfully completed...", type: "info"
+            });
+        }, 2500);
+    }
+
+    function _events_click_btnRestaurantMapping(event, options) {
+        event.preventDefault();
+        options.container.HelperPlugin().ShowHideEjWaitingPopup(true);
+        setTimeout(function () {
+            options.container.HelperPlugin().ShowHideEjWaitingPopup(false);
+            options.container.HelperPlugin().showPNotifyAlert(options, {
+                title: "Message",
+                text: "Mapping has been successfully completed...", type: "info"
+            });
+        }, 2500);
     }
 
     function _cusines_ddl_StubData(options) {
@@ -128,7 +175,45 @@
             Description: 'Meat Dumplings', Ingredients: 'Meat Dumplings', Cusines: 'Syrian', MealType: 'Main Course'
         });
 
+        GLgridData = options.dishesEJModel;
         return options.dishesEJModel;
+    }
+
+    function _restaurantsStubData(options) {
+        options.restaurantsEJModel = [];
+
+        options.restaurantsEJModel.push({
+            ID: Math.floor(Math.random() * 999999), CompanyKey: 'aangan-restaurant', Name: 'Aangan Restaurant', DisplayName: 'Aangan Restaurant'
+        });
+        options.restaurantsEJModel.push({
+            ID: Math.floor(Math.random() * 999999), CompanyKey: 'Aaraamam Restaurant', Name: 'Aaraamam Restaurant', DisplayName: 'Aaraamam Restaurant'
+        });
+        options.restaurantsEJModel.push({
+            ID: Math.floor(Math.random() * 999999), CompanyKey: 'Abdul Aziz Restaurant', Name: 'Abdul Aziz Restaurant', DisplayName: 'Abdul Aziz Restaurant'
+        });
+        options.restaurantsEJModel.push({
+            ID: Math.floor(Math.random() * 999999), CompanyKey: 'Baanthai', Name: 'Baanthai', DisplayName: 'Baanthai'
+        });
+        options.restaurantsEJModel.push({
+            ID: Math.floor(Math.random() * 999999), CompanyKey: 'Bab Al Yam', Name: 'Bab Al Yam', DisplayName: 'Bab Al Yam'
+        });
+        options.restaurantsEJModel.push({
+            ID: Math.floor(Math.random() * 999999), CompanyKey: 'Bab Khyber Restaurant', Name: 'Bab Khyber Restaurant', DisplayName: 'Bab Khyber Restaurant'
+        });
+        options.restaurantsEJModel.push({
+            ID: Math.floor(Math.random() * 999999), CompanyKey: 'Bacchus The Fairmont Dubai', Name: 'Bacchus The Fairmont Dubai', DisplayName: 'Bacchus The Fairmont Dubai'
+        });
+        options.restaurantsEJModel.push({
+            ID: Math.floor(Math.random() * 999999), CompanyKey: 'Cabana', Name: 'Cabana', DisplayName: 'Cabana'
+        });
+        options.restaurantsEJModel.push({
+            ID: Math.floor(Math.random() * 999999), CompanyKey: 'Cactus Catering Co', Name: 'Cactus Catering Co', DisplayName: 'Cactus Catering Co'
+        });
+        options.restaurantsEJModel.push({
+            ID: Math.floor(Math.random() * 999999), CompanyKey: 'Cafe and SWEET shop', Name: 'Cafe and SWEET shop', DisplayName: 'Cafe and SWEET shop'
+        });
+
+        return options.restaurantsEJModel;
     }
 
     function _loadCusinesGrid(options) {
@@ -168,7 +253,6 @@
             toolbarClick: function (e) {
                 this.exportGrid = this["export"];
                 if (e.itemName == "Excel Export") {
-                    //this.exportGrid(window.baseurl + 'api/grid/ExcelExport')
                     options.container.HelperPlugin().showPNotifyAlert(options, { title: "Coming soon...", text: "An awesome export option is coming very soon.", type: "info" });
                     e.cancel = true;
                 }
@@ -344,6 +428,7 @@
             filterSettings: { filterType: "menu" },
             allowTextWrap: true,
             columns: [
+                { type: "checkbox", width: 5 },
                 {
                     field: "ID", isPrimaryKey: true, headerText: "ID", textAlign: ej.TextAlign.Right,
                     validationRules: { required: true, number: true }, width: 20, visible: false
@@ -371,6 +456,7 @@
             filterSettings: { filterType: "menu" },
             allowTextWrap: true,
             columns: [
+                { type: "checkbox", width: 5 },
                 {
                     field: "ID", isPrimaryKey: true, headerText: "ID", textAlign: ej.TextAlign.Right,
                     validationRules: { required: true, number: true }, width: 20, visible: false
@@ -398,6 +484,7 @@
             filterSettings: { filterType: "menu" },
             allowTextWrap: true,
             columns: [
+                { type: "checkbox", width: 20 },
                 {
                     field: "ID", isPrimaryKey: true, headerText: "ID", textAlign: ej.TextAlign.Right,
                     validationRules: { required: true, number: true }, width: 20, visible: false
@@ -409,11 +496,144 @@
         });
     }
 
+    function _loadRestCusinesMappingGrid(options) {
+        options.gridRestCuisinesMapping.ejGrid({
+            dataSource: _cusinesStubData(options),
+            allowPaging: true,
+            isResponsive: true,
+            allowSorting: true,
+            allowMultiSorting: true,
+            allowFiltering: true,
+            gridLines: ej.Grid.GridLines.Horizontal,
+            filterSettings: { showFilterBarStatus: false, statusBarWidth: 500 },
+            allowResizing: true,
+            allowScrolling: true,
+            scrollSettings: { width: '100%', height: '100%' },
+            pageSettings: { pageSize: 5 },
+            enableHeaderHover: true,
+            filterSettings: { filterType: "menu" },
+            allowTextWrap: true,
+            columns: [
+                { type: "checkbox", width: 5 },
+                {
+                    field: "ID", isPrimaryKey: true, headerText: "ID", textAlign: ej.TextAlign.Right,
+                    validationRules: { required: true, number: true }, width: 20, visible: false
+                },
+                { field: "Name", headerText: 'Cuisine Name', width: 60 }
+            ]
+        });
+    }
+
+    function _loadRestMealsMappingGrid(options) {
+        options.gridRestMealsMapping.ejGrid({
+            dataSource: _mealsandSnacksStubData(options),
+            allowPaging: true,
+            isResponsive: true,
+            allowSorting: true,
+            allowMultiSorting: true,
+            allowFiltering: true,
+            gridLines: ej.Grid.GridLines.Horizontal,
+            filterSettings: { showFilterBarStatus: false, statusBarWidth: 500 },
+            allowResizing: true,
+            allowScrolling: true,
+            scrollSettings: { width: '100%', height: '100%' },
+            pageSettings: { pageSize: 5 },
+            enableHeaderHover: true,
+            filterSettings: { filterType: "menu" },
+            allowTextWrap: true,
+            columns: [
+                { type: "checkbox", width: 5 },
+                {
+                    field: "ID", isPrimaryKey: true, headerText: "ID", textAlign: ej.TextAlign.Right,
+                    validationRules: { required: true, number: true }, width: 20, visible: false
+                },
+                { field: "Name", headerText: 'Meals & Snacks Name', width: 60 }
+            ]
+        });
+    }
+
+    function _loadRestDishesMappingGrid(options) {
+        options.gridRestDishMapping.ejGrid({
+            dataSource: _dishesStubData(options),
+            allowPaging: true,
+            isResponsive: true,
+            allowSorting: true,
+            allowMultiSorting: true,
+            allowFiltering: true,
+            gridLines: ej.Grid.GridLines.Horizontal,
+            filterSettings: { showFilterBarStatus: false, statusBarWidth: 500 },
+            allowResizing: true,
+            allowScrolling: true,
+            scrollSettings: { width: '100%', height: '100%' },
+            pageSettings: { pageSize: 10 },
+            enableHeaderHover: true,
+            filterSettings: { filterType: "menu" },
+            allowTextWrap: true,
+            columns: [
+                { type: "checkbox", width: 5 },
+                {
+                    field: "ID", isPrimaryKey: true, headerText: "ID", textAlign: ej.TextAlign.Right,
+                    validationRules: { required: true, number: true }, width: 20, visible: false
+                },
+                { field: "Name", headerText: 'Name', width: 100 }
+            ]
+        });
+    }
+
+    function _loadRestaurantsGrid(options) {
+        options.gridRestaurantMapping.ejGrid({
+            dataSource: _restaurantsStubData(options),
+            detailsTemplate: "#tabGridContents",
+            detailsDataBound: "restaurantDishDetailsGrid",
+            allowPaging: true,
+            isResponsive: true,
+            allowSorting: true,
+            allowMultiSorting: true,
+            allowFiltering: true,
+            gridLines: ej.Grid.GridLines.Horizontal,
+            filterSettings: { showFilterBarStatus: false, statusBarWidth: 500 },
+            allowResizing: true,
+            allowScrolling: true,
+            scrollSettings: { width: '100%', height: '100%' },
+            pageSettings: { pageSize: 10 },
+            enableHeaderHover: true,
+            filterSettings: { filterType: "menu" },
+            allowTextWrap: true,
+            columns: [
+                { type: "checkbox", width: 5 },
+                {
+                    field: "ID", isPrimaryKey: true, headerText: "ID", textAlign: ej.TextAlign.Right, width: 20, visible: false
+                },
+                { field: "DisplayName", headerText: 'Restaurant Name', width: 100 }
+            ]
+        });
+    }
+
+    function restaurantDishDetailsGrid(e) {
+        e.detailsElement.find("#restaurantDishDetailsGrid").ejGrid({
+            dataSource: GLgridData,
+            columns: [
+                { type: "checkbox", width: 20 },
+                {
+                    field: "ID", isPrimaryKey: true, headerText: "ID", textAlign: ej.TextAlign.Right, width: 20, visible: false
+                },
+                { field: "Name", headerText: 'Name', width: 100 },
+                { field: "Cusines", headerText: 'Cusines', width: 100 },
+                { field: "MealType", headerText: 'Meals & Snacks', width: 100 }
+            ]
+        });
+
+        e.detailsElement.css("display", "");
+        e.detailsElement.find(".tabcontrol").ejTab({ selectedItemIndex: 1 });
+    }
+
+
     Plugin.prototype = {
         // initialize options
         init: function (options) {
             $.extend(this.options, options);
             _configureMasterTab(this.options);
+            _configureEvents(this.options);
             _loadCusinesGrid(this.options);
             _loadmealsandSnacksGrid(this.options);
             _loadDishesGrid(this.options);
@@ -421,7 +641,11 @@
             _loadCusinesMappingGrid(this.options);
             _loadMealsMappingGrid(this.options);
             _loadDishesMappingGrid(this.options);
-            //this.options.clsDvCusines.show('slow');
+            _loadRestCusinesMappingGrid(this.options);
+            _loadRestDishesMappingGrid(this.options);
+            _loadRestMealsMappingGrid(this.options);
+            _loadRestaurantsGrid(this.options);
+            this.options.container.HelperPlugin().InitEjWaitingPopup(this.options.homeContainer);
         }
     };
 
@@ -448,3 +672,5 @@
     };
 
 }(jQuery, window, document));
+
+GLgridData = [];
