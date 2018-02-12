@@ -52,7 +52,11 @@
             gridRestMealsMapping: "",
             gridRestDishMapping: "",
             btnRestaurantMapping: "",
-            gridRestaurantMapping: ""
+            gridRestaurantMapping: "",
+
+            dtlDishesWindow: "",
+            gridRestaurantDtlDishes: ""
+
         };
 
         this.options.homeContainer = $("#homeContainer");
@@ -74,6 +78,9 @@
         this.options.gridRestDishMapping = element.find("#gridRestDishMapping");
         this.options.btnRestaurantMapping = element.find("#btnRestaurantMapping");
         this.options.gridRestaurantMapping = element.find("#gridRestaurantMapping");
+
+        this.options.dtlDishesWindow = element.find("#dtlDishesWindow");
+        this.options.gridRestaurantDtlDishes = element.find("#gridRestaurantDtlDishes");
 
         this.init(options);
     };
@@ -160,11 +167,13 @@
         options.dishesEJModel = [];
         options.dishesEJModel.push({
             ID: Math.floor(Math.random() * 999999), Name: 'Lamb Soup',
-            Description: 'Lamb Soup', Ingredients: '', Cusines: 'Iranian', MealType: 'Meals'
+            Description: 'Lamb Soup', Ingredients: '',
+            Cusines: 'Iranian,Iranian,Iranian,Iranian,Iranian,Iranian,Iranian,Iranian,Iranian,Iranian',
+            MealType: 'Meals'
         });
         options.dishesEJModel.push({
-            ID: Math.floor(Math.random() * 999999), Name: 'Herring Potato, Beetroot, Mayon Salad',
-            Description: 'Herring Potato, Beetroot, Mayon Salad', Ingredients: '', Cusines: 'Fried Chicken', MealType: 'Combos'
+            ID: Math.floor(Math.random() * 999999), Name: 'Herring Potato, Beetroot, Mayon Salad,Mayon Salad,Mayon Salad,Mayon Salad',
+            Description: 'Herring Potato, Beetroot, Mayon Salad,Mayon Salad,Mayon Salad,Mayon Salad', Ingredients: '', Cusines: 'Fried Chicken', MealType: 'Combos'
         });
         options.dishesEJModel.push({
             ID: Math.floor(Math.random() * 999999), Name: 'Meat, Potato, Carrot, Green Peas Salad',
@@ -175,7 +184,6 @@
             Description: 'Meat Dumplings', Ingredients: 'Meat Dumplings', Cusines: 'Syrian', MealType: 'Main Course'
         });
 
-        GLgridData = options.dishesEJModel;
         return options.dishesEJModel;
     }
 
@@ -232,7 +240,7 @@
             pageSettings: { pageSize: 10 },
             enableHeaderHover: true,
             filterSettings: { filterType: "menu" },
-            allowTextWrap: true,
+            allowTextWrap: false,
             editSettings: { allowEditing: true, allowAdding: true, allowDeleting: true, editMode: "batch" },
             toolbarSettings: {
                 showToolbar: true, toolbarItems:
@@ -250,6 +258,18 @@
                 { field: "Name", headerText: 'Cuisine Name', width: 150 },
                 { field: "Description", headerText: 'Description', width: 150 },
             ],
+            queryCellInfo: function (args) {
+                //Add attributes to cells in queryCellInfo 
+                $(args.cell).attr({
+                    "data-toggle": "tooltip",
+                    "data-container": "body",
+                    "title": args.data[args.column.field]
+                });
+            },
+            dataBound: function (args) {
+                //Render tooltip in dataBound event.
+                $("[data-toggle=tooltip]").tooltip();
+            },
             toolbarClick: function (e) {
                 this.exportGrid = this["export"];
                 if (e.itemName == "Excel Export") {
@@ -284,7 +304,7 @@
             pageSettings: { pageSize: 10 },
             enableHeaderHover: true,
             filterSettings: { filterType: "menu" },
-            allowTextWrap: true,
+            allowTextWrap: false,
             editSettings: { allowEditing: true, allowAdding: true, allowDeleting: true, editMode: "batch" },
             toolbarSettings: {
                 showToolbar: true, toolbarItems:
@@ -302,6 +322,18 @@
                 { field: "Name", headerText: 'Name', width: 150 },
                 { field: "Description", headerText: 'Description', width: 150 },
             ],
+            queryCellInfo: function (args) {
+                //Add attributes to cells in queryCellInfo 
+                $(args.cell).attr({
+                    "data-toggle": "tooltip",
+                    "data-container": "body",
+                    "title": args.data[args.column.field]
+                });
+            },
+            dataBound: function (args) {
+                //Render tooltip in dataBound event.
+                $("[data-toggle=tooltip]").tooltip();
+            },
             toolbarClick: function (e) {
                 this.exportGrid = this["export"];
                 if (e.itemName == "Excel Export") {
@@ -341,7 +373,7 @@
             pageSettings: { pageSize: 10 },
             enableHeaderHover: true,
             filterSettings: { filterType: "menu" },
-            allowTextWrap: true,
+            allowTextWrap: false,
             editSettings: { allowEditing: true, allowAdding: true, allowDeleting: true, editMode: "batch" },
             toolbarSettings: {
                 showToolbar: true, toolbarItems:
@@ -390,6 +422,18 @@
                     }
                 },
             ],
+            queryCellInfo: function (args) {
+                //Add attributes to cells in queryCellInfo 
+                $(args.cell).attr({
+                    "data-toggle": "tooltip",
+                    "data-container": "body",
+                    "title": args.data[args.column.field]
+                });
+            },
+            dataBound: function (args) {
+                //Render tooltip in dataBound event.
+                $("[data-toggle=tooltip]").tooltip();
+            },
             toolbarClick: function (e) {
                 this.exportGrid = this["export"];
                 if (e.itemName == "Excel Export") {
@@ -426,15 +470,27 @@
             pageSettings: { pageSize: 5 },
             enableHeaderHover: true,
             filterSettings: { filterType: "menu" },
-            allowTextWrap: true,
+            allowTextWrap: false,
             columns: [
-                { type: "checkbox", width: 5 },
+                { type: "checkbox", width: 8 },
                 {
                     field: "ID", isPrimaryKey: true, headerText: "ID", textAlign: ej.TextAlign.Right,
                     validationRules: { required: true, number: true }, width: 20, visible: false
                 },
                 { field: "Name", headerText: 'Cuisine Name', width: 60 }
-            ]
+            ],
+            queryCellInfo: function (args) {
+                //Add attributes to cells in queryCellInfo 
+                $(args.cell).attr({
+                    "data-toggle": "tooltip",
+                    "data-container": "body",
+                    "title": args.data[args.column.field]
+                });
+            },
+            dataBound: function (args) {
+                //Render tooltip in dataBound event.
+                $("[data-toggle=tooltip]").tooltip();
+            }
         });
     }
 
@@ -454,15 +510,27 @@
             pageSettings: { pageSize: 5 },
             enableHeaderHover: true,
             filterSettings: { filterType: "menu" },
-            allowTextWrap: true,
+            allowTextWrap: false,
             columns: [
-                { type: "checkbox", width: 5 },
+                { type: "checkbox", width: 8 },
                 {
                     field: "ID", isPrimaryKey: true, headerText: "ID", textAlign: ej.TextAlign.Right,
                     validationRules: { required: true, number: true }, width: 20, visible: false
                 },
                 { field: "Name", headerText: 'Meals & Snacks Name', width: 60 }
-            ]
+            ],
+            queryCellInfo: function (args) {
+                //Add attributes to cells in queryCellInfo 
+                $(args.cell).attr({
+                    "data-toggle": "tooltip",
+                    "data-container": "body",
+                    "title": args.data[args.column.field]
+                });
+            },
+            dataBound: function (args) {
+                //Render tooltip in dataBound event.
+                $("[data-toggle=tooltip]").tooltip();
+            }
         });
     }
 
@@ -482,7 +550,7 @@
             pageSettings: { pageSize: 10 },
             enableHeaderHover: true,
             filterSettings: { filterType: "menu" },
-            allowTextWrap: true,
+            allowTextWrap: false,
             columns: [
                 { type: "checkbox", width: 20 },
                 {
@@ -492,7 +560,19 @@
                 { field: "Name", headerText: 'Name', width: 100 },
                 { field: "Cusines", headerText: 'Cusines', width: 100 },
                 { field: "MealType", headerText: 'Meals & Snacks', width: 100 }
-            ]
+            ],
+            queryCellInfo: function (args) {
+                //Add attributes to cells in queryCellInfo 
+                $(args.cell).attr({
+                    "data-toggle": "tooltip",
+                    "data-container": "body",
+                    "title": args.data[args.column.field]
+                });
+            },
+            dataBound: function (args) {
+                //Render tooltip in dataBound event.
+                $("[data-toggle=tooltip]").tooltip();
+            }
         });
     }
 
@@ -512,15 +592,27 @@
             pageSettings: { pageSize: 5 },
             enableHeaderHover: true,
             filterSettings: { filterType: "menu" },
-            allowTextWrap: true,
+            allowTextWrap: false,
             columns: [
-                { type: "checkbox", width: 5 },
+                { type: "checkbox", width: 8 },
                 {
                     field: "ID", isPrimaryKey: true, headerText: "ID", textAlign: ej.TextAlign.Right,
                     validationRules: { required: true, number: true }, width: 20, visible: false
                 },
                 { field: "Name", headerText: 'Cuisine Name', width: 60 }
-            ]
+            ],
+            queryCellInfo: function (args) {
+                //Add attributes to cells in queryCellInfo 
+                $(args.cell).attr({
+                    "data-toggle": "tooltip",
+                    "data-container": "body",
+                    "title": args.data[args.column.field]
+                });
+            },
+            dataBound: function (args) {
+                //Render tooltip in dataBound event.
+                $("[data-toggle=tooltip]").tooltip();
+            }
         });
     }
 
@@ -540,15 +632,27 @@
             pageSettings: { pageSize: 5 },
             enableHeaderHover: true,
             filterSettings: { filterType: "menu" },
-            allowTextWrap: true,
+            allowTextWrap: false,
             columns: [
-                { type: "checkbox", width: 5 },
+                { type: "checkbox", width: 8 },
                 {
                     field: "ID", isPrimaryKey: true, headerText: "ID", textAlign: ej.TextAlign.Right,
                     validationRules: { required: true, number: true }, width: 20, visible: false
                 },
                 { field: "Name", headerText: 'Meals & Snacks Name', width: 60 }
-            ]
+            ],
+            queryCellInfo: function (args) {
+                //Add attributes to cells in queryCellInfo 
+                $(args.cell).attr({
+                    "data-toggle": "tooltip",
+                    "data-container": "body",
+                    "title": args.data[args.column.field]
+                });
+            },
+            dataBound: function (args) {
+                //Render tooltip in dataBound event.
+                $("[data-toggle=tooltip]").tooltip();
+            }
         });
     }
 
@@ -568,23 +672,39 @@
             pageSettings: { pageSize: 10 },
             enableHeaderHover: true,
             filterSettings: { filterType: "menu" },
-            allowTextWrap: true,
+            allowTextWrap: false,
             columns: [
-                { type: "checkbox", width: 5 },
+                { type: "checkbox", width: 8 },
                 {
                     field: "ID", isPrimaryKey: true, headerText: "ID", textAlign: ej.TextAlign.Right,
-                    validationRules: { required: true, number: true }, width: 20, visible: false
+                    width: 20, visible: false
                 },
-                { field: "Name", headerText: 'Name', width: 100 }
-            ]
+                { field: "Name", headerText: 'Name', width: 60 }
+            ],
+            queryCellInfo: function (args) {
+                //Add attributes to cells in queryCellInfo 
+                $(args.cell).attr({
+                    "data-toggle": "tooltip",
+                    "data-container": "body",
+                    "title": args.data[args.column.field]
+                });
+            },
+            dataBound: function (args) {
+                //Render tooltip in dataBound event.
+                $("[data-toggle=tooltip]").tooltip();
+            }
         });
     }
 
     function _loadRestaurantsGrid(options) {
         options.gridRestaurantMapping.ejGrid({
             dataSource: _restaurantsStubData(options),
-            detailsTemplate: "#tabGridContents",
-            detailsDataBound: "restaurantDishDetailsGrid",
+            contextClick: function (args) {
+                if (_.isEqual(args.ID, 'dtlDishes')) {
+                    _dishesDtlModal(options, args);
+                }
+            },
+            contextMenuSettings: { enableContextMenu: true, contextMenuItems: [], customContextMenuItems: [{ id: 'dtlDishes', text: "Dishes" }] },
             allowPaging: true,
             isResponsive: true,
             allowSorting: true,
@@ -598,35 +718,93 @@
             pageSettings: { pageSize: 10 },
             enableHeaderHover: true,
             filterSettings: { filterType: "menu" },
-            allowTextWrap: true,
+            allowTextWrap: false,
             columns: [
-                { type: "checkbox", width: 5 },
+                { type: "checkbox", width: 8 },
                 {
                     field: "ID", isPrimaryKey: true, headerText: "ID", textAlign: ej.TextAlign.Right, width: 20, visible: false
                 },
                 { field: "DisplayName", headerText: 'Restaurant Name', width: 100 }
-            ]
+            ],
+            queryCellInfo: function (args) {
+                //Add attributes to cells in queryCellInfo 
+                $(args.cell).attr({
+                    "data-toggle": "tooltip",
+                    "data-container": "body",
+                    "title": args.data[args.column.field]
+                });
+            },
+            dataBound: function (args) {
+                //Render tooltip in dataBound event.
+                $("[data-toggle=tooltip]").tooltip();
+            }
         });
     }
 
-    function restaurantDishDetailsGrid(e) {
-        e.detailsElement.find("#restaurantDishDetailsGrid").ejGrid({
-            dataSource: GLgridData,
+    function _dishesDtlModal(options, args) {
+        if (!_.isNull(options.dtlDishesDialog))
+            options.dtlDishesDialog.open();
+    }
+
+    function _initdishesDtlModal(options) {
+        if (_.isNull(options.dtlDishesWindow)) { return; }
+
+        options.dtlDishesWindow.ejDialog(
+            {
+                enableModal: true,
+                enableResize: false,
+                width: 800,
+                containment: ".clshomeContainer",
+                showOnInit: false,
+                title: "Dishes"
+            });
+
+        options.dtlDishesDialog = options.dtlDishesWindow.data("ejDialog");
+
+        if (!_.isNull(options.dtlDishesDialog)) {
+            _loadRestaurantDishesDtlGrid(options);
+        }
+    }
+
+    function _loadRestaurantDishesDtlGrid(options) {
+        options.gridRestaurantDtlDishes.ejGrid({
+            dataSource: _dishesStubData(options),
+            allowPaging: true,
+            isResponsive: true,
+            allowSorting: true,
+            allowMultiSorting: true,
+            allowFiltering: true,
+            gridLines: ej.Grid.GridLines.Horizontal,
+            filterSettings: { showFilterBarStatus: false, statusBarWidth: 500 },
+            allowResizing: true,
+            allowScrolling: true,
+            scrollSettings: { width: '100%', height: '100%' },
+            pageSettings: { pageSize: 10 },
+            enableHeaderHover: true,
+            filterSettings: { filterType: "menu" },
+            allowTextWrap: false,
             columns: [
-                { type: "checkbox", width: 20 },
                 {
                     field: "ID", isPrimaryKey: true, headerText: "ID", textAlign: ej.TextAlign.Right, width: 20, visible: false
                 },
                 { field: "Name", headerText: 'Name', width: 100 },
                 { field: "Cusines", headerText: 'Cusines', width: 100 },
                 { field: "MealType", headerText: 'Meals & Snacks', width: 100 }
-            ]
+            ],
+            queryCellInfo: function (args) {
+                //Add attributes to cells in queryCellInfo 
+                $(args.cell).attr({
+                    "data-toggle": "tooltip",
+                    "data-container": "body",
+                    "title": args.data[args.column.field]
+                });
+            },
+            dataBound: function (args) {
+                //Render tooltip in dataBound event.
+                $("[data-toggle=tooltip]").tooltip();
+            }
         });
-
-        e.detailsElement.css("display", "");
-        e.detailsElement.find(".tabcontrol").ejTab({ selectedItemIndex: 1 });
     }
-
 
     Plugin.prototype = {
         // initialize options
@@ -645,6 +823,7 @@
             _loadRestDishesMappingGrid(this.options);
             _loadRestMealsMappingGrid(this.options);
             _loadRestaurantsGrid(this.options);
+            _initdishesDtlModal(this.options);
             this.options.container.HelperPlugin().InitEjWaitingPopup(this.options.homeContainer);
         }
     };
@@ -672,5 +851,3 @@
     };
 
 }(jQuery, window, document));
-
-GLgridData = [];
