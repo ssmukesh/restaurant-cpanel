@@ -45,17 +45,40 @@
 
         try {
 
-            if (_.isEqual(userInfo.email, 'admin@restaurants-uae.com')
-                && _.isEqual(userInfo.password, 'admin123')) {
-                options.container.HelperPlugin().redirect_dashboard();
-            }
-            else {
-                options.container.HelperPlugin().ShowHideEjWaitingPopup(false);
-                options.container.HelperPlugin().showPNotifyAlert(options, {
-                    title: "Having Trouble Signing On?",
-                    text: 'You have entered an incorrect email or Password. Please enter your information again.', type: "error"
-                });
-            }
+            // if (_.isEqual(userInfo.email, 'admin@restaurants-uae.com')
+            //     && _.isEqual(userInfo.password, 'admin123')) {
+            //     options.container.HelperPlugin().redirect_dashboard();
+            // }
+            // else {
+            //     options.container.HelperPlugin().ShowHideEjWaitingPopup(false);
+            //     options.container.HelperPlugin().showPNotifyAlert(options, {
+            //         title: "Having Trouble Signing On?",
+            //         text: 'You have entered an incorrect email or Password. Please enter your information again.', type: "error"
+            //     });
+            // }
+
+            var body = {
+                grant_type: 'password',
+                username: userInfo.email,
+                password: userInfo.password
+            };
+
+            $.ajax({
+                type: 'POST',
+                data: body,
+                cache: false,
+                dataType: 'json',
+                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                url: JSON_APP_CONFIG.issuer + JSON_APP_CONFIG.endpoint.authorization,
+                complete: function (result) {
+                },
+                success: function (data) {
+                    options.container.HelperPlugin().ShowHideEjWaitingPopup(false);
+                },
+                error: function (error) {
+                    //options.container.HelperPlugin().redirect_signout();
+                }
+            });
 
         }
         catch (error) {

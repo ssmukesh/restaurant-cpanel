@@ -1,7 +1,7 @@
 JSON_APP_CONFIG={
-    "issuer": "",
+    "issuer": "http://localhost/RestaurantsUAEAPI/",
     "endpoint": {
-        "authorization": "",
+        "authorization": "oauth2/v1/Tokens/bearer",
         "refreshtoken": ""
     }
 }
